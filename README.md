@@ -51,9 +51,9 @@ powershell -ExecutionPolicy Bypass -File scripts\verify.ps1
 
 ## 数据源说明
 
-- Internet Archive Advanced Search 可输出 JSON、XML、HTML、CSV 和 RSS。
-- Jikan 提供 MyAnimeList 动漫元数据搜索。
-- TVmaze 提供剧集搜索 API，结果按相关性返回。
+- Internet Archive Advanced Search 可输出 JSON、XML、HTML、CSV 和 RSS：https://archivesupport.zendesk.com/hc/en-us/articles/360018359991-Search-A-Basic-Guide
+- Jikan 提供 MyAnimeList 动漫元数据搜索：https://docs.jikan.moe/usage/search/anime/
+- TVmaze 提供剧集搜索 API，结果按相关性返回：https://www.tvmaze.com/api
 
 ## 后续路线
 
@@ -65,4 +65,3 @@ powershell -ExecutionPolicy Bypass -File scripts\verify.ps1
 ## License
 
 MIT
-
