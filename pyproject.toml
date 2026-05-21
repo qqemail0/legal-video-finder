@@ -1,0 +1,20 @@
+[project]
+name = "legal-video-finder"
+version = "0.1.0"
+description = "A Python desktop app for discovering legal video resources, anime metadata, films, shows, and official viewing links."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "qqemail0" }]
+keywords = ["desktop", "video", "anime", "movie", "legal", "search"]
+
+[project.urls]
+Homepage = "https://github.com/qqemail0/legal-video-finder"
+Source = "https://github.com/qqemail0/legal-video-finder"
+
+[project.scripts]
+legal-video-finder = "legal_video_finder.app:main"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+

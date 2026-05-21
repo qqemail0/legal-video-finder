@@ -1,0 +1,15 @@
+[
+  {
+    "title": "Example Legal Movie",
+    "aliases": ["示例合法电影"],
+    "kind": "电影",
+    "year": "2026",
+    "description": "这里填写你拥有授权、公共版权或官方允许公开访问的视频说明。",
+    "watch_url": "https://example.com/watch/example-legal-movie",
+    "source_url": "https://example.com/example-legal-movie",
+    "legal_status": "user-authorized",
+    "legal_note": "请只添加你有权使用或官方允许公开访问的来源。",
+    "tags": ["示例", "合法源"]
+  }
+]
+

@@ -1,0 +1,99 @@
+[
+  {
+    "title": "Big Buck Bunny",
+    "aliases": ["大雄兔", "Blender Bunny"],
+    "kind": "动画短片",
+    "year": "2008",
+    "description": "Blender Foundation 开放电影项目，适合作为合法动画视频搜索和播放入口示例。",
+    "watch_url": "https://archive.org/details/BigBuckBunny_328",
+    "source_url": "https://peach.blender.org/",
+    "legal_status": "creative-commons",
+    "legal_note": "开放电影项目，具体授权以项目官网和档案页为准。",
+    "tags": ["动画", "开源电影", "Blender", "短片"]
+  },
+  {
+    "title": "Sintel",
+    "aliases": ["辛特尔", "Blender Sintel"],
+    "kind": "动画短片",
+    "year": "2010",
+    "description": "Blender Foundation 开放动画短片，奇幻风格，适合作为动漫电影类合法资源示例。",
+    "watch_url": "https://archive.org/details/Sintel",
+    "source_url": "https://durian.blender.org/",
+    "legal_status": "creative-commons",
+    "legal_note": "开放电影项目，具体授权以项目官网和档案页为准。",
+    "tags": ["动画", "奇幻", "Blender", "短片"]
+  },
+  {
+    "title": "Elephants Dream",
+    "aliases": ["大象之梦", "Orange Open Movie"],
+    "kind": "动画短片",
+    "year": "2006",
+    "description": "Blender 第一个开放电影项目，包含可公开访问的影片页面和项目资料。",
+    "watch_url": "https://archive.org/details/ElephantsDream",
+    "source_url": "https://orange.blender.org/",
+    "legal_status": "creative-commons",
+    "legal_note": "开放电影项目，具体授权以项目官网和档案页为准。",
+    "tags": ["动画", "实验", "Blender", "开放电影"]
+  },
+  {
+    "title": "Tears of Steel",
+    "aliases": ["钢铁之泪", "Mango Open Movie"],
+    "kind": "科幻短片",
+    "year": "2012",
+    "description": "Blender Foundation 真人与视觉特效结合的开放电影，提供官方项目入口。",
+    "watch_url": "https://archive.org/details/TearsOfSteel_1080p",
+    "source_url": "https://mango.blender.org/",
+    "legal_status": "creative-commons",
+    "legal_note": "开放电影项目，具体授权以项目官网和档案页为准。",
+    "tags": ["科幻", "特效", "Blender", "开放电影"]
+  },
+  {
+    "title": "The General",
+    "aliases": ["将军号", "Buster Keaton The General"],
+    "kind": "公共版权电影",
+    "year": "1926",
+    "description": "经典默片电影，Internet Archive 上有公开视频档案页面。",
+    "watch_url": "https://archive.org/details/TheGeneral",
+    "source_url": "https://archive.org/details/TheGeneral",
+    "legal_status": "public-domain-catalog",
+    "legal_note": "公共版权状态可能因地区不同而变化，请以来源页面和所在地法律为准。",
+    "tags": ["电影", "默片", "经典", "公共版权"]
+  },
+  {
+    "title": "Night of the Living Dead",
+    "aliases": ["活死人之夜", "George Romero Night of the Living Dead"],
+    "kind": "公共版权电影",
+    "year": "1968",
+    "description": "经典恐怖电影，Internet Archive 上有公开视频档案页面。",
+    "watch_url": "https://archive.org/details/night_of_the_living_dead",
+    "source_url": "https://archive.org/details/night_of_the_living_dead",
+    "legal_status": "public-domain-catalog",
+    "legal_note": "公共版权状态可能因地区不同而变化，请以来源页面和所在地法律为准。",
+    "tags": ["电影", "恐怖", "经典", "公共版权"]
+  },
+  {
+    "title": "Spring",
+    "aliases": ["Blender Spring Open Movie"],
+    "kind": "动画短片",
+    "year": "2019",
+    "description": "Blender Studio 开放动画短片，适合作为高质量合法动画入口。",
+    "watch_url": "https://studio.blender.org/films/spring/",
+    "source_url": "https://studio.blender.org/films/spring/",
+    "legal_status": "official-open-movie",
+    "legal_note": "官方开放电影页面，具体授权以 Blender Studio 页面为准。",
+    "tags": ["动画", "自然", "Blender", "开放电影"]
+  },
+  {
+    "title": "Cosmos Laundromat",
+    "aliases": ["Cosmos Laundromat First Cycle", "Blender Gooseberry"],
+    "kind": "动画短片",
+    "year": "2015",
+    "description": "Blender Gooseberry 项目的开放动画短片，提供官方页面。",
+    "watch_url": "https://studio.blender.org/films/cosmos-laundromat/",
+    "source_url": "https://studio.blender.org/films/cosmos-laundromat/",
+    "legal_status": "official-open-movie",
+    "legal_note": "官方开放电影页面，具体授权以 Blender Studio 页面为准。",
+    "tags": ["动画", "开放电影", "Blender", "短片"]
+  }
+]
+
