@@ -33,8 +33,11 @@ class BuiltInLegalCatalogProvider:
             aliases = tuple(item.get("aliases", []))
             confidence = score_match(query, item.get("title", ""), aliases)
             haystack = " ".join([item.get("title", ""), item.get("description", ""), " ".join(aliases), " ".join(item.get("tags", []))])
-            if confidence < 45 and query.casefold() not in haystack.casefold():
+            haystack_match = query.casefold() in haystack.casefold()
+            if confidence < 60 and not haystack_match:
                 continue
+            if haystack_match and confidence < 55:
+                confidence = 55
             results.append(_video_from_json(item, self.name, confidence))
         return sorted(results, key=lambda result: result.confidence, reverse=True)[:limit]
 
@@ -53,8 +56,11 @@ class CustomJsonProvider:
         for item in items:
             confidence = score_match(query, item.get("title", ""), item.get("aliases", []))
             haystack = " ".join([item.get("title", ""), item.get("description", ""), " ".join(item.get("tags", []))])
-            if confidence < 45 and query.casefold() not in haystack.casefold():
+            haystack_match = query.casefold() in haystack.casefold()
+            if confidence < 60 and not haystack_match:
                 continue
+            if haystack_match and confidence < 55:
+                confidence = 55
             results.append(_video_from_json(item, self.name, confidence))
         return sorted(results, key=lambda result: result.confidence, reverse=True)[:limit]
 
@@ -85,20 +91,25 @@ class InternetArchiveProvider:
         for doc in docs:
             identifier = doc.get("identifier", "")
             title = doc.get("title") or identifier
+            description = strip_html(doc.get("description", ""))[:600]
             url = f"https://archive.org/details/{identifier}" if identifier else "https://archive.org"
             collections = doc.get("collection") or []
             if isinstance(collections, str):
                 collections = [collections]
+            confidence = score_match(query, title)
+            haystack = " ".join([title, description, " ".join(str(item) for item in collections)])
+            if confidence < 60 and query.casefold() not in haystack.casefold():
+                continue
             results.append(
                 VideoResult(
                     title=title,
                     provider=self.name,
                     kind="公共档案视频",
                     year=str(doc.get("year") or ""),
-                    description=strip_html(doc.get("description", ""))[:600],
+                    description=description,
                     watch_url=url,
                     source_url=url,
-                    confidence=score_match(query, title),
+                    confidence=confidence,
                     legal_status="archive-public-access",
                     legal_note="来自 Internet Archive 的公开视频档案；具体版权和地区限制以原页面说明为准。",
                     tags=tuple(str(item) for item in collections[:5]),
@@ -124,17 +135,24 @@ class JikanAnimeProvider:
             images = item.get("images") or {}
             jpg = images.get("jpg") or {}
             aliases = [item.get("title_english", ""), item.get("title_japanese", "")]
+            confidence = score_match(query, title, aliases)
+            synopsis = strip_html(item.get("synopsis", ""))[:600]
+            genre_text = " ".join(genre.get("name", "") for genre in item.get("genres", []) if genre.get("name"))
+            if confidence < 55 and query.casefold() not in f"{title} {synopsis} {genre_text}".casefold():
+                continue
+            if confidence < 55:
+                confidence = 55
             results.append(
                 VideoResult(
                     title=title,
                     provider=self.name,
                     kind=f"动漫 / {item.get('type') or 'Anime'}",
                     year=str(item.get("year") or ""),
-                    description=strip_html(item.get("synopsis", ""))[:600],
+                    description=synopsis,
                     watch_url=trailer_url or item.get("url", ""),
                     source_url=item.get("url", ""),
                     thumbnail_url=jpg.get("image_url", ""),
-                    confidence=score_match(query, title, aliases),
+                    confidence=confidence,
                     legal_status="metadata-trailer",
                     legal_note="Jikan 提供动漫元数据和预告片入口，不提供正片盗版播放源。",
                     tags=tuple(genre.get("name", "") for genre in item.get("genres", []) if genre.get("name")),
@@ -161,17 +179,24 @@ class TVMazeProvider:
             image = show.get("image") or {}
             api_score = float(entry.get("score") or 0) * 100
             exact_score = score_match(query, title)
+            summary = strip_html(show.get("summary", ""))[:600]
+            genre_text = " ".join(show.get("genres") or ())
+            confidence = clamp_score(max(exact_score, api_score * (exact_score / 100)))
+            if confidence < 55 and query.casefold() not in f"{title} {summary} {genre_text}".casefold():
+                continue
+            if confidence < 55:
+                confidence = 55
             results.append(
                 VideoResult(
                     title=title,
                     provider=self.name,
                     kind="剧集 / TV",
                     year=year,
-                    description=strip_html(show.get("summary", ""))[:600],
+                    description=summary,
                     watch_url=show.get("officialSite") or show.get("url", ""),
                     source_url=show.get("url", ""),
                     thumbnail_url=image.get("medium", ""),
-                    confidence=clamp_score(max(api_score, exact_score)),
+                    confidence=confidence,
                     legal_status="metadata-official-link",
                     legal_note="TVmaze 提供剧集元数据；观看入口优先使用官方站点或 TVmaze 页面。",
                     tags=tuple(show.get("genres") or ()),
@@ -217,4 +242,3 @@ def _video_from_json(item: dict, provider: str, confidence: float) -> VideoResul
         legal_note=item.get("legal_note", "用户自定义合法来源，请自行确认授权范围。"),
         tags=tuple(item.get("tags", [])),
     )
-

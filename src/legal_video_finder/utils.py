@@ -33,10 +33,17 @@ def score_match(query: str, title: str, aliases: Iterable[str] = ()) -> float:
             ratio = 1.0
         elif normalized_query in candidate or candidate in normalized_query:
             ratio = max(ratio, 0.82)
+        else:
+            query_chars = set(normalized_query.replace(" ", ""))
+            candidate_chars = set(candidate.replace(" ", ""))
+            if query_chars and candidate_chars:
+                coverage = len(query_chars & candidate_chars) / len(query_chars)
+                ratio *= min(1.0, coverage * 1.15)
+            if len(normalized_query) <= 8 and len(candidate) <= 10 and normalized_query[:1] != candidate[:1]:
+                ratio *= 0.65
         best = max(best, ratio)
     return round(best * 100, 2)
 
 
 def clamp_score(value: float) -> float:
     return round(max(0.0, min(100.0, value)), 2)
-
